@@ -1,6 +1,7 @@
 package com.chanpion.admin.entity.vo;
 
-import com.vacomall.entity.SysMenu;
+
+import com.chanpion.admin.entity.SysMenu;
 
 import java.io.Serializable;
 import java.util.ArrayList;

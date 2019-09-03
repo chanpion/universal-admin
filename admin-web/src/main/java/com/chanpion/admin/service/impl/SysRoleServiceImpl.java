@@ -1,9 +1,9 @@
 package com.chanpion.admin.service.impl;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.vacomall.entity.SysRole;
-import com.vacomall.mapper.SysRoleMapper;
-import com.vacomall.service.ISysRoleService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chanpion.admin.entity.SysRole;
+import com.chanpion.admin.mapper.SysRoleMapper;
+import com.chanpion.admin.service.ISysRoleService;
 import org.springframework.stereotype.Service;
 
 /**

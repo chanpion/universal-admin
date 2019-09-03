@@ -1,5 +1,6 @@
 package com.chanpion.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.chanpion.admin.entity.SysMenu;
 import com.chanpion.admin.entity.vo.TreeMenu;
@@ -7,11 +8,13 @@ import com.chanpion.admin.entity.vo.TreeMenuAllowAccess;
 import com.chanpion.admin.mapper.SysMenuMapper;
 import com.chanpion.admin.mapper.SysRoleMenuMapper;
 import com.chanpion.admin.service.ISysMenuService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +26,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /**
      * 菜单服务
      */
-    @Autowired
+    @Resource
     private SysMenuMapper sysMenuMapper;
     /**
      * 角色菜单关系服务
      */
-    @Autowired
+    @Resource
     private SysRoleMenuMapper sysRoleMenuMapper;
 
 
@@ -54,11 +57,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<TreeMenu> selectTreeMenuByMenuIdsAndPid(final List<String> menuIds, String pid) {
         // TODO Auto-generated method stub
-        EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-        ew.orderBy("sort", true);
+        QueryWrapper<SysMenu> ew = new QueryWrapper<>();
+        ew.orderBy(true, true, "sort");
         ew.eq("pid", pid);
         ew.in("id", menuIds.size() > 0 ? menuIds : Lists.newArrayList(RandomStringUtils.randomNumeric(30)));
-        List<SysMenu> sysMenus = this.selectList(ew);
+        List<SysMenu> sysMenus = this.list(ew);
         List<TreeMenu> treeMenus = new ArrayList<TreeMenu>();
         for (SysMenu sysMenu : sysMenus) {
             TreeMenu treeMenu = new TreeMenu();
@@ -76,10 +79,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public List<TreeMenuAllowAccess> selectTreeMenuAllowAccessByMenuIdsAndPid(
             final List<String> menuIds, String pid) {
         // TODO Auto-generated method stub
-        EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-        ew.orderBy("sort", true);
+        QueryWrapper<SysMenu> ew = new QueryWrapper<>();
+        ew.orderBy(true, true, "sort");
         ew.eq("pid", pid);
-        List<SysMenu> sysMenus = this.selectList(ew);
+        List<SysMenu> sysMenus = this.list(ew);
 
         List<TreeMenuAllowAccess> treeMenuAllowAccesss = new ArrayList<TreeMenuAllowAccess>();
         for (SysMenu sysMenu : sysMenus) {

@@ -7,9 +7,9 @@ import java.util.List;
 
 /**
  * SysUserRole 表数据库控制层接口
+ * @author April Chen
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
     List<String> selectPermissionByUid(String uid);
-
 }
