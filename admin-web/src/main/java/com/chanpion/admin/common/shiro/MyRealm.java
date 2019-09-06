@@ -3,7 +3,7 @@ package com.chanpion.admin.common.shiro;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chanpion.admin.entity.SysUser;
 import com.chanpion.admin.service.ISysRoleMenuService;
-import com.chanpion.admin.service.ISysUserRoleService;
+import com.chanpion.admin.service.SysUserRoleService;
 import com.chanpion.admin.service.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -32,7 +32,7 @@ public class MyRealm extends AuthorizingRealm{
 	 * 用户角色服务
 	 */
 	@Autowired
-    private ISysUserRoleService sysUserRoleService;
+    private SysUserRoleService sysUserRoleService;
 	/**
 	 * 角色菜单服务
 	 */

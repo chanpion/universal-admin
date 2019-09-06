@@ -1,6 +1,6 @@
 package com.chanpion.admin.common.shiro;
 
-import com.vacomall.common.shiro.tag.ShiroTags;
+import com.chanpion.admin.common.shiro.tag.ShiroTags;
 import freemarker.template.TemplateException;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 

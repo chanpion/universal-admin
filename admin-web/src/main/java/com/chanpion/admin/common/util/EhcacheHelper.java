@@ -4,7 +4,6 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
-
 /**
  * <p>
  * ehcache 缓存工具类

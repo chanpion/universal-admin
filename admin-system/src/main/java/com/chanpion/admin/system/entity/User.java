@@ -2,6 +2,8 @@ package com.chanpion.admin.system.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author April Chen
  * @date 2019/5/30 19:08
@@ -11,5 +13,10 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private String phone;
+    private String salt;
+    private short status;
+    private String mobile;
+    private Integer sex;
+    private Date createTime;
+    private Date updateTime;
 }

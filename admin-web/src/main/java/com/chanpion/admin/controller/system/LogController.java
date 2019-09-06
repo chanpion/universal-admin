@@ -1,6 +1,7 @@
 package com.chanpion.admin.controller.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chanpion.admin.common.controller.SuperController;
@@ -42,18 +43,18 @@ public class LogController extends SuperController {
         // 查询分页
         QueryWrapper<SysLog> ew = new QueryWrapper<SysLog>();
         if (StringUtils.isNotBlank(search)) {
-            ew.where("(userName like CONCAT('%',{0},'%')", search)
-                    .or("title like CONCAT('%',{0},'%'))", search);
+//            ew.where("(userName like CONCAT('%',{0},'%')", search)
+//                    .or("title like CONCAT('%',{0},'%'))", search);
             model.addAttribute("search", search);
         }
         //日期查询
         if (StringUtils.isNotBlank(daterange)) {
             model.addAttribute("daterange", daterange);
             String[] dateranges = StringUtils.split(daterange, "-");
-            ew.addFilter(" createTime >= {0}", dateranges[0].trim().replaceAll("/", "-") + " 00:00:00");
-            ew.addFilter(" createTime <= {0}", dateranges[1].trim().replaceAll("/", "-") + " 23:59:59");
+            ew.eq(" createTime >= {0}", dateranges[0].trim().replaceAll("/", "-") + " 00:00:00");
+            ew.eq(" createTime <= {0}", dateranges[1].trim().replaceAll("/", "-") + " 23:59:59");
         }
-        Page<SysLog> pageData = sysLogService.selectPage(page, ew);
+        IPage<SysLog> pageData = sysLogService.page(page, ew);
         model.addAttribute("pageData", pageData);
         return "system/log/list";
     }
@@ -64,7 +65,7 @@ public class LogController extends SuperController {
     @RequestMapping("/params/{id}")
     @ResponseBody
     public String params(@PathVariable String id, Model model) {
-        SysLog sysLog = sysLogService.selectById(id);
+        SysLog sysLog = sysLogService.getById(id);
         return sysLog.getParams();
     }
 

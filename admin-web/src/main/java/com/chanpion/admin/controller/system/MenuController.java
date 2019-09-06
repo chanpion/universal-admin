@@ -81,9 +81,7 @@ public class MenuController extends SuperController {
     @RequestMapping("/add")
     public String add(Model model) {
 
-        QueryWrapper<SysMenu> ew = new QueryWrapper<SysMenu>();
-        ew.orderBy("code", true);
-        ew.eq("pid", "0");
+        QueryWrapper<SysMenu> ew = new QueryWrapper<SysMenu>().orderByAsc("code").eq("pid",0);
         List<SysMenu> list = sysMenuService.list(ew);
         model.addAttribute("list", list);
         return "system/menu/add";
@@ -177,10 +175,8 @@ public class MenuController extends SuperController {
     @RequestMapping("/json")
     @ResponseBody
     public Rest json(String pid) {
-        EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-        ew.orderBy("sort");
-        ew.addFilter("pid = {0} ", pid);
-        List<SysMenu> list = sysMenuService.selectList(ew);
+        QueryWrapper<SysMenu> ew = new QueryWrapper<SysMenu>().orderByAsc("sort").eq("pid",pid);
+        List<SysMenu> list = sysMenuService.list(ew);
 
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for (SysMenu m : list) {
@@ -200,7 +196,7 @@ public class MenuController extends SuperController {
     @ResponseBody
     public Rest checkMenuResource(String resource) {
 
-        List<SysMenu> list = sysMenuService.list(new QueryWrapper<>().addFilter("resource = {0}", resource));
+        List<SysMenu> list = sysMenuService.list(new QueryWrapper<SysMenu>().eq("resource", resource));
         if (list.size() > 0) {
             return Rest.failure("资源已存在,请换一个尝试.");
         }

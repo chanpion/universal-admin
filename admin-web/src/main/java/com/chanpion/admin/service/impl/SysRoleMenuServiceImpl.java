@@ -49,7 +49,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // TODO Auto-generated method stub
 
         QueryWrapper<SysRoleMenu> ew = new QueryWrapper<>();
-        ew.addFilter("roleId = {0}", roleId);
+        ew.eq("roleId", roleId);
         return this.list(ew);
 
     }

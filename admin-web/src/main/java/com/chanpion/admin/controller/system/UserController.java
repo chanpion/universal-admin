@@ -10,7 +10,7 @@ import com.chanpion.admin.entity.SysUser;
 import com.chanpion.admin.entity.SysUserRole;
 import com.chanpion.admin.service.ISysDeptService;
 import com.chanpion.admin.service.ISysRoleService;
-import com.chanpion.admin.service.ISysUserRoleService;
+import com.chanpion.admin.service.SysUserRoleService;
 import com.chanpion.admin.service.SysUserService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class UserController extends SuperController {
 	@Autowired
     private ISysRoleService sysRoleService;
 	@Autowired
-    private ISysUserRoleService sysUserRoleService;
+    private SysUserRoleService sysUserRoleService;
 	@Autowired
     private ISysDeptService sysDeptService;
 	
