@@ -17,11 +17,9 @@
 			<hr class="hr15">
 			<input placeholder="密码" id="password" name="password" type="password" class="loginInput">
 			<hr class="hr15">
-			@if(kaptchaEnable){
 			<input placeholder="验证码" id="code" name="code" type="text" class="codeInput loginInput">
 			<img src="captcha.jpg" alt="验证码" id="imgCode" class="codeImg" title="单击图片刷新！">
 			<hr class="hr15">
-			@}
 			<input value="登录" style="width: 100%;" type="button" id="loginBtn">
 			<hr class="hr20">
             <p class="copyright">
@@ -29,7 +27,7 @@
             </p>
 		</form>
 	</div>
-	<script src="/libs/jquery.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
 	<script type="text/javascript">
 
         $(function(){
