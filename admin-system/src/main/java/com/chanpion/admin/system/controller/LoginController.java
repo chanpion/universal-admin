@@ -19,10 +19,10 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        if (ShiroUtil.isLogin()) {
-            return "redirect:/";
-        }
-        return "/login";
+//        if (ShiroUtil.isLogin()) {
+//            return "redirect:/";
+//        }
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

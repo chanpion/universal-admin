@@ -36,6 +36,8 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  freemarker:
+    suffix: .html
 
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
