@@ -28,52 +28,52 @@
 		</form>
 	</div>
 	<script src="/js/jquery.min.js"></script>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">-->
 
-        $(function(){
-            if (self != top) {
-                top.location.href = self.location.href;
-            }
-            $('#loginBtn').on('click', login);
+        <!--$(function(){-->
+            <!--if (self != top) {-->
+                <!--top.location.href = self.location.href;-->
+            <!--}-->
+            <!--$('#loginBtn').on('click', login);-->
 
-            @if(kaptchaEnable){
-            $('#imgCode').on('click', refreshCode);
-            @}
+            <!--@if(kaptchaEnable){-->
+            <!--$('#imgCode').on('click', refreshCode);-->
+            <!--@}-->
 
-            $(document).keyup(function (event) {
-				if (event.keyCode === 13) {
-				    $('#loginBtn').trigger('click');
-				}
-            })
+            <!--$(document).keyup(function (event) {-->
+				<!--if (event.keyCode === 13) {-->
+				    <!--$('#loginBtn').trigger('click');-->
+				<!--}-->
+            <!--})-->
 
-        });
+        <!--});-->
 
-        @if(kaptchaEnable){
-        function refreshCode() {
-            $('#imgCode').attr('src', "captcha.jpg?t=" + $.now());
-		}
-		@}
+        <!--@if(kaptchaEnable){-->
+        <!--function refreshCode() {-->
+            <!--$('#imgCode').attr('src', "captcha.jpg?t=" + $.now());-->
+		<!--}-->
+		<!--@}-->
 
-        function login() {
-            var username = $('#username').val();
-            if (username === '') {
-                $('.tip').text('用户名不能为空');
-                return false;
-            }
-            var password = $('#password').val();
-            if (password === '') {
-                $('.tip').text('密码不能为空');
-                return false;
-            }
-            @if(kaptchaEnable){
-			var code = $('#code').val();
-			if (code === '') {
-				$('.tip').text('验证码不能为空');
-				return false;
-			}
-            @}
-            $('#loginForm').submit();
-        }
-	</script>
+        <!--function login() {-->
+            <!--var username = $('#username').val();-->
+            <!--if (username === '') {-->
+                <!--$('.tip').text('用户名不能为空');-->
+                <!--return false;-->
+            <!--}-->
+            <!--var password = $('#password').val();-->
+            <!--if (password === '') {-->
+                <!--$('.tip').text('密码不能为空');-->
+                <!--return false;-->
+            <!--}-->
+            <!--@if(kaptchaEnable){-->
+			<!--var code = $('#code').val();-->
+			<!--if (code === '') {-->
+				<!--$('.tip').text('验证码不能为空');-->
+				<!--return false;-->
+			<!--}-->
+            <!--@}-->
+            <!--$('#loginForm').submit();-->
+        <!--}-->
+	<!--</script>-->
 </body>
 </html>

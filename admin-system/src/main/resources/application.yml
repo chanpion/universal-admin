@@ -38,6 +38,8 @@ spring:
             multi-statement-allow: true
   freemarker:
     suffix: .html
+  main:
+    allow-bean-definition-overriding: true
 
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
@@ -45,6 +47,8 @@ mybatis:
   type-aliases-package: com.chanpion.admin.system.entity
 
 shiro:
-  enabled: false
-  annotations:
-    enabled: false
+  web:
+    enabled: true
+  loginUrl: /login
+  unauthorizedUrl: /login
+  successUrl: /index
