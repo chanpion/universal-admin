@@ -13,8 +13,8 @@ import org.apache.shiro.util.ByteSource;
  */
 public class ShiroUtil {
     private static SecureRandomNumberGenerator secureRandom = new SecureRandomNumberGenerator();
-    private static final String ALGORITHM_NAME = "md5";
-    private static final int HASH_ITERATIONS = 2;
+    public static final String ALGORITHM_NAME = "md5";
+    public static final int HASH_ITERATIONS = 2;
 
     /**
      * 加密用户密码

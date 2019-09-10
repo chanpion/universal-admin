@@ -17,6 +17,6 @@ public class InitService implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userDao.selectAll().forEach(System.out::println);
+//        userDao.selectAll().forEach(System.out::println);
     }
 }

@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.security;
 
+import com.chanpion.admin.system.utils.ShiroUtil;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
@@ -24,14 +25,14 @@ public class ShiroConfig {
     public UserRealm userRealm() {
         UserRealm userRealm = new UserRealm();
         userRealm.setCredentialsMatcher(credentialsMatcher());
-        return new UserRealm();
+        return userRealm;
     }
 
     @Bean
     public CredentialsMatcher credentialsMatcher() {
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-        credentialsMatcher.setHashAlgorithmName("md5");
-        credentialsMatcher.setHashIterations(2);
+        credentialsMatcher.setHashAlgorithmName(ShiroUtil.ALGORITHM_NAME);
+        credentialsMatcher.setHashIterations(ShiroUtil.HASH_ITERATIONS);
         return credentialsMatcher;
     }
 

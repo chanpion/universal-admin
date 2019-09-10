@@ -54,6 +54,7 @@ public class LoginController {
         try {
             subject.login(token);
             if (subject.isAuthenticated()) {
+                logger.info("user {} login success.", username);
                 return "index";
             } else {
                 return "error";
@@ -87,7 +88,7 @@ public class LoginController {
             model.addAttribute("message", msg);
             logger.info(msg);
         } catch (Exception e) {
-            logger.info("{}", e);
+            logger.error("{}", e);
         } finally {
             model.addAttribute("message", msg);
         }
@@ -121,6 +122,6 @@ public class LoginController {
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        KaptchaExtend kaptchaExtend = new KaptchaExtend();
 //        kaptchaExtend.captcha(request, response);
-        CaptchaUtil.captcha(request,response);
+        CaptchaUtil.captcha(request, response);
     }
 }
