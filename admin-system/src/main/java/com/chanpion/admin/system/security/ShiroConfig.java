@@ -6,6 +6,7 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -13,6 +14,8 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
 
 /**
  * @author April Chen
@@ -41,6 +44,10 @@ public class ShiroConfig {
         return new MemoryConstrainedCacheManager();
     }
 
+    @Bean
+    public SessionDAO sessionDAO() {
+        return new RedisSessionDao();
+    }
 
     @Bean
     public DefaultWebSessionManager sessionManager() {
