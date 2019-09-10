@@ -1,8 +1,15 @@
 package com.chanpion.admin.system.controller;
 
 import com.chanpion.admin.system.entity.User;
+import com.chanpion.admin.system.utils.CaptchaUtil;
 import com.chanpion.admin.system.utils.ShiroUtil;
 import com.google.code.kaptcha.servlet.KaptchaExtend;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +27,8 @@ import java.io.IOException;
  */
 @Controller
 public class LoginController {
+    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     /**
      * 跳转登录页面
      *
@@ -34,9 +43,55 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(User user, Model model) {
-        System.out.println(user);
-        return "/index";
+    public String login(String username, String password, Boolean rememberme, Model model) {
+        if (rememberme == null) {
+            rememberme = Boolean.FALSE;
+        }
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberme);
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        String msg = null;
+        try {
+            subject.login(token);
+            if (subject.isAuthenticated()) {
+                return "index";
+            } else {
+                return "error";
+            }
+        } catch (IncorrectCredentialsException e) {
+            msg = "登录密码错误!";
+            model.addAttribute("message", "密码有误，请重新输入!");
+            logger.info(msg);
+        } catch (ExcessiveAttemptsException e) {
+            msg = "登录失败次数过多!";
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (LockedAccountException e) {
+            msg = "帐号已被锁定! ";
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (DisabledAccountException e) {
+            msg = "帐号已被禁用! ";
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (ExpiredCredentialsException e) {
+            msg = "帐号已过期! ";
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (UnknownAccountException e) {
+            msg = "帐号不存在!";
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (UnauthorizedException e) {
+            msg = "您没有得到相应的授权！" + e.getMessage();
+            model.addAttribute("message", msg);
+            logger.info(msg);
+        } catch (Exception e) {
+            logger.info("{}", e);
+        } finally {
+            model.addAttribute("message", msg);
+        }
+        return "/error";
     }
 
     /**
@@ -64,7 +119,8 @@ public class LoginController {
     @RequestMapping("/captcha")
     @ResponseBody
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        KaptchaExtend kaptchaExtend = new KaptchaExtend();
-        kaptchaExtend.captcha(request, response);
+//        KaptchaExtend kaptchaExtend = new KaptchaExtend();
+//        kaptchaExtend.captcha(request, response);
+        CaptchaUtil.captcha(request,response);
     }
 }

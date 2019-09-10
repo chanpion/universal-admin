@@ -33,10 +33,17 @@ public interface UserDao {
 
     /**
      * 根据id查询
-     * @param id
+     * @param username
      * @return
      */
-    User selectById (int id);
+    User selectByUsername (String username);
+
+    /**
+     * 根据用户名查找
+     * @param username
+     * @return
+     */
+    User findByName(String username);
 
     /**
      * 查询所有用户信息

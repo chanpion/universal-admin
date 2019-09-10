@@ -16,7 +16,7 @@ public class UserService {
     private UserDao userDao;
 
     public User findByUsername(String username) {
-        return null;
+        return userDao.selectByUsername(username);
     }
 
 }

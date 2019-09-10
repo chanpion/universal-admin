@@ -17,6 +17,7 @@ public class User {
     private short status;
     private String mobile;
     private Integer sex;
+    private Integer age;
     private Date createTime;
     private Date updateTime;
 }

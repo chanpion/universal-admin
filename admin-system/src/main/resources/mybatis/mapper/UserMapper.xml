@@ -29,6 +29,9 @@
             <if test="age != null">
                 age,
             </if>
+            <if test="salt != null">
+                salt,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -45,6 +48,9 @@
             </if>
             <if test="age != null">
                 #{age,jdbcType=INTEGER},
+            </if>
+            <if test="salt != null">
+                #{salt},
             </if>
         </trim>
     </insert>
@@ -73,5 +79,12 @@
         *
         from user
         where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUsername" resultType="User">
+        SELECT *
+        FROM user
+        WHERE username = #{username}
+        LIMIT  1
     </select>
 </mapper>
