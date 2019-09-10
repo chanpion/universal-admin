@@ -39,7 +39,7 @@ spring:
   freemarker:
     enabled: true
     charset: UTF-8
-    suffix: .ftl
+    suffix: .html
     check-template-location: true
     template-loader-path: ["classpath:/templates/"]
     request-context-attribute: ctx

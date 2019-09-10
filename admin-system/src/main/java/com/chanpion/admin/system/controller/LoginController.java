@@ -1,5 +1,6 @@
 package com.chanpion.admin.system.controller;
 
+import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.utils.ShiroUtil;
 import com.google.code.kaptcha.servlet.KaptchaExtend;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,13 @@ public class LoginController {
 //        if (ShiroUtil.isLogin()) {
 //            return "redirect:/";
 //        }
-        return "login1";
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(Model model) {
-        return "/login";
+    public String login(User user, Model model) {
+        System.out.println(user);
+        return "/index";
     }
 
     /**

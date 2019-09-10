@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--<#include "/common/head.html">-->
-  <style type="text/css">
-    .has-feedback .form-control{
-      height: 50px;
-    }
-    .form-control-feedback {
-      top: 8px;important!
-    }
-  </style>
+  <#include "/common/head.html">
+  <!--<style type="text/css">-->
+    <!--.has-feedback .form-control{-->
+      <!--height: 50px;-->
+    <!--}-->
+    <!--.form-control-feedback {-->
+      <!--top: 8px;important!-->
+    <!--}-->
+  <!--</style>-->
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/index"><b>Admin</b>LTE</a>
+    <a href="/index"><b>Admin</b></a>
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">请输入用户名和密码登录</p>
@@ -28,6 +28,16 @@
       <div class="form-group has-feedback mg">
         <input type="password" class="form-control" name="password"  placeholder="密码"  data-rule="密码:required;password;">
         <span class="glyphicon glyphicon-lock form-control-feedback" ></span>
+      </div>
+      <div class="form-group has-feedback mg">
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+            </div>
+            <div class="col-xs-6">
+                <img alt="单击图片刷新！" class="pointer img" src="/captcha" onclick="this.src='/captcha'" height="34px">
+            </div>
+        </div>
       </div>
 
       <div class="row">

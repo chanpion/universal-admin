@@ -63,6 +63,9 @@ public class ShiroConfig {
         shiroFilterChainDefinition.addPathDefinition("/adminlte/**", "anon");
         shiroFilterChainDefinition.addPathDefinition("/css/**", "anon");
         shiroFilterChainDefinition.addPathDefinition("/js/**", "anon");
+        shiroFilterChainDefinition.addPathDefinition("/error/**", "anon");
+        shiroFilterChainDefinition.addPathDefinition("/captcha", "anon");
+        shiroFilterChainDefinition.addPathDefinition("/login", "anon");
         shiroFilterChainDefinition.addPathDefinition("/**", "authc");
         return shiroFilterChainDefinition;
     }
