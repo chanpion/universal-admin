@@ -41,6 +41,7 @@ public class ShiroConfig {
 
     @Bean
     public CacheManager cacheManager() {
+        RedisCacheManager cacheManager = new RedisCacheManager();
         return new MemoryConstrainedCacheManager();
     }
 
@@ -53,7 +54,9 @@ public class ShiroConfig {
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setGlobalSessionTimeout(300000);
+        sessionManager.setSessionDAO(sessionDAO());
         sessionManager.setCacheManager(cacheManager());
+        sessionManager.getSessionListeners().add(new ShiroSessionListener());
         return sessionManager;
     }
 
@@ -62,6 +65,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
         webSecurityManager.setRealm(userRealm());
         webSecurityManager.setCacheManager(cacheManager());
+        webSecurityManager.setSessionManager(sessionManager());
         return webSecurityManager;
     }
 

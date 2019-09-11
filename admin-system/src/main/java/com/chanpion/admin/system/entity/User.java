@@ -2,6 +2,7 @@ package com.chanpion.admin.system.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,9 @@ import java.util.Date;
  * @date 2019/5/30 19:08
  */
 @Data
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 3632181665115916990L;
+
     private Long id;
     private String username;
     private String password;

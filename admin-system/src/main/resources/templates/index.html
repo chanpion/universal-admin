@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin</title>
+    <#include "/common/head.html">
 </head>
-<body>
-index
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+      <#include "/common/header.html">
+      <#include "/common/menu.html">
+      <div class="content-wrapper">
+      </div>
+      <#include "/common/footer.html">
+  </div>
+
+  <#include "/common/js.html">
+  <script>
+      $(document).ready(function () {
+          $('.sidebar-menu').tree()
+      })
+  </script>
 </body>
 </html>

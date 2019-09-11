@@ -55,7 +55,9 @@ spring:
       number_format: #.##
   main:
     allow-bean-definition-overriding: true
-
+  redis:
+    host: localhost
+    port: 6379
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/mybatis-config.xml

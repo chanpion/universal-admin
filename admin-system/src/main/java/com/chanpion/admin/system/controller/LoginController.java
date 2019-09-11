@@ -1,9 +1,7 @@
 package com.chanpion.admin.system.controller;
 
-import com.chanpion.admin.system.entity.User;
 import com.chanpion.admin.system.utils.CaptchaUtil;
 import com.chanpion.admin.system.utils.ShiroUtil;
-import com.google.code.kaptcha.servlet.KaptchaExtend;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.UnauthorizedException;
