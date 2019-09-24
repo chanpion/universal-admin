@@ -6,16 +6,19 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
+import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 
 /**
  * @author April Chen
@@ -42,7 +45,7 @@ public class ShiroConfig {
     @Bean
     public CacheManager cacheManager() {
         RedisCacheManager cacheManager = new RedisCacheManager();
-        return new MemoryConstrainedCacheManager();
+        return cacheManager;
     }
 
     @Bean
@@ -51,13 +54,26 @@ public class ShiroConfig {
     }
 
     @Bean
+    public SessionListener sessionListener() {
+        return new ShiroSessionListener(sessionDAO());
+    }
+
+    @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setGlobalSessionTimeout(300000);
         sessionManager.setSessionDAO(sessionDAO());
         sessionManager.setCacheManager(cacheManager());
-        sessionManager.getSessionListeners().add(new ShiroSessionListener());
+        sessionManager.setSessionListeners(Collections.singletonList(sessionListener()));
+        sessionManager.setSessionIdCookieEnabled(true);
+        sessionManager.setSessionIdUrlRewritingEnabled(true);
+        sessionManager.setSessionIdCookie(simpleCookie());
         return sessionManager;
+    }
+
+    @Bean
+    public SimpleCookie simpleCookie() {
+        return new SimpleCookie("shiro.sesssionid");
     }
 
     @Bean

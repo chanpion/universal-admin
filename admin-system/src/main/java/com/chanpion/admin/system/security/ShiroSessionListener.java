@@ -2,6 +2,7 @@ package com.chanpion.admin.system.security;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +14,11 @@ import javax.annotation.Resource;
  */
 public class ShiroSessionListener implements SessionListener {
     private static final Logger log = LoggerFactory.getLogger(ShiroSessionListener.class);
-    @Resource
-    private RedisSessionDao sessionDao;
+    private SessionDAO sessionDao;
+
+    public ShiroSessionListener(SessionDAO sessionDAO) {
+        this.sessionDao = sessionDAO;
+    }
 
     @Override
     public void onStart(Session session) {
@@ -29,7 +33,9 @@ public class ShiroSessionListener implements SessionListener {
 
     @Override
     public void onExpiration(Session session) {
-        sessionDao.delete(session);
-        log.debug("ShiroSessionListener session {} 过期", session.getId());
+        if (session != null) {
+            sessionDao.delete(session);
+            log.debug("ShiroSessionListener session {} 过期", session.getId());
+        }
     }
 }

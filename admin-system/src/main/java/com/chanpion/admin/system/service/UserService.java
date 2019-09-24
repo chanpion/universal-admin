@@ -5,6 +5,7 @@ import com.chanpion.admin.system.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author April Chen
@@ -19,4 +20,7 @@ public class UserService {
         return userDao.selectByUsername(username);
     }
 
+    public List<User> findAll(){
+        return  userDao.selectAll();
+    }
 }

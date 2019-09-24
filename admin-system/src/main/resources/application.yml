@@ -58,10 +58,17 @@ spring:
   redis:
     host: localhost
     port: 6379
+
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/mybatis-config.xml
   type-aliases-package: com.chanpion.admin.system.entity
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
 
 shiro:
   web:
