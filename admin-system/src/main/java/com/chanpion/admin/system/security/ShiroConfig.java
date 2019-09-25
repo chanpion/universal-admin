@@ -55,7 +55,7 @@ public class ShiroConfig {
 
     @Bean
     public SessionListener sessionListener() {
-        return new ShiroSessionListener(sessionDAO());
+        return new ShiroSessionListener();
     }
 
     @Bean
@@ -73,7 +73,9 @@ public class ShiroConfig {
 
     @Bean
     public SimpleCookie simpleCookie() {
-        return new SimpleCookie("shiro.sesssionid");
+        SimpleCookie cookie = new SimpleCookie("shiro.sesssionid");
+        cookie.setPath("/");
+        return cookie;
     }
 
     @Bean

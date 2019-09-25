@@ -23,7 +23,7 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
      */
     private static int expireTime = 300;
 
-    private static String prefix = "login-session:";
+    private static String prefix = "shiro:session:";
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;

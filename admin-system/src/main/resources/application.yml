@@ -76,3 +76,8 @@ shiro:
   loginUrl: /login
   unauthorizedUrl: /login
   successUrl: /index
+
+logging:
+  level:
+    root: info
+

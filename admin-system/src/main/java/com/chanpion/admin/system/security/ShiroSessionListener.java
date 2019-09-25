@@ -14,11 +14,6 @@ import javax.annotation.Resource;
  */
 public class ShiroSessionListener implements SessionListener {
     private static final Logger log = LoggerFactory.getLogger(ShiroSessionListener.class);
-    private SessionDAO sessionDao;
-
-    public ShiroSessionListener(SessionDAO sessionDAO) {
-        this.sessionDao = sessionDAO;
-    }
 
     @Override
     public void onStart(Session session) {
@@ -27,14 +22,12 @@ public class ShiroSessionListener implements SessionListener {
 
     @Override
     public void onStop(Session session) {
-        sessionDao.delete(session);
         log.debug("ShiroSessionListener session {} 被销毁", session.getId());
     }
 
     @Override
     public void onExpiration(Session session) {
         if (session != null) {
-            sessionDao.delete(session);
             log.debug("ShiroSessionListener session {} 过期", session.getId());
         }
     }

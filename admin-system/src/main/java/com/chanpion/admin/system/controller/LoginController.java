@@ -5,6 +5,7 @@ import com.chanpion.admin.system.utils.ShiroUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,15 +46,15 @@ public class LoginController {
         if (rememberme == null) {
             rememberme = Boolean.FALSE;
         }
+//        ensureLogout();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberme);
         Subject subject = SecurityUtils.getSubject();
-        subject.logout();
         String msg = null;
         try {
             subject.login(token);
             if (subject.isAuthenticated()) {
                 logger.info("user {} login success.", username);
-                return "index";
+                return "/index";
             } else {
                 return "error";
             }
@@ -109,7 +110,7 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         ShiroUtil.logout();
-        return "/login";
+        return "login";
     }
 
     /**
@@ -117,9 +118,26 @@ public class LoginController {
      */
     @RequestMapping("/captcha")
     @ResponseBody
-    public void captcha(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        KaptchaExtend kaptchaExtend = new KaptchaExtend();
-//        kaptchaExtend.captcha(request, response);
+    public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CaptchaUtil.captcha(request, response);
+    }
+
+    /**
+     * 确保完全注销
+     */
+    private void ensureLogout() {
+        try {
+            Subject currentUser = SecurityUtils.getSubject();
+            if (currentUser == null) {
+                return;
+            }
+            currentUser.logout();
+            Session session = currentUser.getSession(false);
+            if (session == null) {
+                return;
+            }
+            session.stop();
+        } catch (Exception ignore) {
+        }
     }
 }

@@ -17,6 +17,6 @@ public class RedisCacheManager implements CacheManager {
 
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
-        return new ShiroRedisCache<K, V>(name, redisTemplate);
+        return new ShiroRedisCache<>(name, redisTemplate);
     }
 }
