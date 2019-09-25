@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2019/9/6 16:36
  */
 @Service
-public class UserService {
+public class UserService implements BaseService<User> {
     @Resource
     private UserDao userDao;
 
@@ -20,7 +20,18 @@ public class UserService {
         return userDao.selectByUsername(username);
     }
 
-    public List<User> findAll(){
-        return  userDao.selectAll();
+    public List<User> findAll() {
+        return userDao.selectAll();
+    }
+
+
+    @Override
+    public User findOne(Long id) {
+        return userDao.findById(id);
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
     }
 }
