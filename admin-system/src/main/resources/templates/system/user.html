@@ -48,23 +48,23 @@
                                 </tr>
                                 <#list users as user>
                                 <tr>
-                                    <!--<td>-->
-                                        <!--<label>-->
-                                            <!--<input type="checkbox" class="minimal checkbox-item">-->
-                                            <!--${((pageData.current-1)*pageData.size +user_index+1)!}-->
-                                        <!--</label>-->
-                                    <!--</td>-->
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" class="minimal checkbox-item">
+                                            ${((pageData.current-1)*pageData.size +user_index+1)!}
+                                        </label>
+                                    </td>
                                     <td>${(user.username)!}</td>
                                     <td>${(user.userDesc)!'--'}</td>
-                                    <td>${(user.createTime?string('yyyy/MM/dd HH:mm:ss'))!}</td>
+                                    <td>${(user.createTime?string('yyyy-MM-dd HH:mm:ss'))!}</td>
                                     <td>${(user.deptName)!'--'}</td>
-                                    <td><#if user.status==1>启用<#else><font color="red">禁用</font></#if></td>
+                                    <td><#if user.status==1><i class="fa fa-toggle-on"></i><#else><font color="red"><i class="fa fa-toggle-off"></i></font></#if></td>
                                     <td>
-                                        <a class="btn btn-primary btn-xs dialog" href="javascript:;" data-url="/system/user/edit/${(user.id)!}" data-title="编辑用户" data-width="850" data-height="550">编辑</a>
+                                        <a class="btn btn-primary btn-xs dialog" href="javascript:;" data-url="/system/user/edit/${(user.id)!}" data-title="编辑用户" data-width="850" data-height="550" title="编辑"><i class="fa fa-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs"
                                            data-tiggle="ajax"
                                            data-submit-url="/system/user/delete?id=${(user.id)!}"
-                                           data-confirm="您确定要删除该条记录吗?">删除</a>
+                                           data-confirm="您确定要删除该条记录吗?"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             </#list>

@@ -74,10 +74,12 @@ shiro:
   web:
     enabled: true
   loginUrl: /login
-  unauthorizedUrl: /login
+  unauthorizedUrl: /403
   successUrl: /index
+
 
 logging:
   level:
     root: info
+    com.chanpion: debug
 
