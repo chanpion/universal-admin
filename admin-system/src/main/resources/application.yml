@@ -8,9 +8,12 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://localhost:3306/admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-      username: root
-      password:
+#      url: jdbc:mysql://localhost:3306/admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#      username: root
+#      password:
+      url: jdbc:mysql://172.19.80.206:3305/test?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: dialog
+      password: dialog
       initial-size: 10
       max-active: 100
       min-idle: 10
@@ -72,11 +75,11 @@ pagehelper:
 
 shiro:
   web:
-    enabled: true
+    enabled: false
   loginUrl: /login
   unauthorizedUrl: /403
   successUrl: /index
-
+  enabled: false
 
 logging:
   level:

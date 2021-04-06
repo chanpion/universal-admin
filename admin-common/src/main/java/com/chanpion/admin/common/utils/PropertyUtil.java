@@ -1,4 +1,4 @@
-package com.chanpion.admin.common;
+package com.chanpion.admin.common.utils;
 
 /**
  * @author April Chen

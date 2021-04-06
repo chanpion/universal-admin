@@ -96,7 +96,8 @@ public class ShiroConfig {
         shiroFilterChainDefinition.addPathDefinition("/error/**", "anon");
         shiroFilterChainDefinition.addPathDefinition("/captcha", "anon");
         shiroFilterChainDefinition.addPathDefinition("/login", "anon");
-        shiroFilterChainDefinition.addPathDefinition("/**", "authc");
+        shiroFilterChainDefinition.addPathDefinition("/**", "anon");
+//        shiroFilterChainDefinition.addPathDefinition("/**", "authc");
         return shiroFilterChainDefinition;
     }
 
